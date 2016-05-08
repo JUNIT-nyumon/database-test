@@ -10,21 +10,21 @@ import org.junit.Rule;
  */
 public interface DbUnitTesterExample {
 
-    @Rule
-    public DbUnitTester tester = new DbUnitTester(
-            "org.h2.Driver", "jdbc:h2:tcp://localhost/db;SCHEMA=ut", 
-            "sa", "", "ut") {
-        
-        @Override
-        protected void before() throws Exception {
-            executeQuery("DROP TABLE IF EXISTS users");
-            executeQuery("CREATE TABLE users(id INT AUTO INCREMENT, name VARCHAR(255))");
-        }
+	@Rule
+	public DbUnitTester tester = new DbUnitTester(
+			"org.h2.Driver", "jdbc:h2:tcp://localhost/db;SCHEMA=ut", 
+			"sa", "", "ut") {
 
-        @Override
-        protected IDataSet createDataSet() throws Exception {
-            return new FlatXmlDataSetBuilder()
-                .build(getClass().getResourceAsStream("fixtures.xml"));
-        }
-    };
+		@Override
+		protected void before() throws Exception {
+			executeQuery("DROP TABLE IF EXISTS users");
+			executeQuery("CREATE TABLE users(id INT AUTO INCREMENT, name VARCHAR(255))");
+		}
+
+		@Override
+		protected IDataSet createDataSet() throws Exception {
+			return new FlatXmlDataSetBuilder()
+			.build(getClass().getResourceAsStream("fixtures.xml"));
+		}
+	};
 }
